@@ -28,5 +28,5 @@ public class Payment {
 
     @Column(nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
-    private Date date;
+    private Date date = new Date();
 }

@@ -2,10 +2,7 @@ package com.example.controller;
 
 import com.example.model.*;
 import com.example.service.DeliveryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,11 @@ public class DeliveryController {
     @GetMapping("/{id}")
     public Delivery getById(@PathVariable int id) {
         return deliveryService.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable int id) {
+        deliveryService.deleteById(id);
     }
 
     @GetMapping("/{id}/customer")

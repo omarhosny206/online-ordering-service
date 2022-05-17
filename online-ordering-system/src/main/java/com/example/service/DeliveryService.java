@@ -26,6 +26,10 @@ public class DeliveryService {
         return deliveryRepository.findById(id).orElse(null);
     }
 
+    public void deleteById(int id) {
+        deliveryRepository.deleteById(id);
+    }
+
     public Customer getCustomer(int id) {
         Delivery delivery = getById(id);
 

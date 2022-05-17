@@ -22,7 +22,7 @@ public class Delivery {
 
     @Column(nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
-    private Date date;
+    private Date date = new Date();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
