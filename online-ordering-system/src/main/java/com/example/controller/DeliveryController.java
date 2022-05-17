@@ -42,7 +42,7 @@ public class DeliveryController {
 
     @GetMapping("/{id}/products")
     public List<Product> getAllProducts(@PathVariable int id) {
-       return deliveryService.getAllProducts(id);
+        return deliveryService.getAllProducts(id);
     }
 
     @GetMapping("/{id}/sellers")

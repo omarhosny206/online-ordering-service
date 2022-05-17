@@ -61,7 +61,7 @@ public class CustomerService {
         Order order = new Order();
         Customer customer = getById(id);
 
-        if(customer == null)
+        if (customer == null)
             return null;
 
         customer.getOrders().add(order);
@@ -74,7 +74,7 @@ public class CustomerService {
         Delivery delivery = new Delivery();
         Customer customer = getById(id);
 
-        if(customer == null)
+        if (customer == null)
             return null;
 
         customer.getDeliveries().add(delivery);
