@@ -1,11 +1,12 @@
 package com.example.service;
 
 import com.example.model.Customer;
+import com.example.model.Delivery;
 import com.example.model.Order;
 import com.example.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer getById(@PathVariable int id) {
+    public Customer getById(int id) {
         return customerRepository.findById(id).orElse(null);
     }
 
@@ -28,8 +29,17 @@ public class CustomerService {
         Customer customer = getById(id);
 
         if (customer == null)
-            return null;
+            return new ArrayList<>();
 
         return customer.getOrders();
+    }
+
+    public List<Delivery> getAllDeliveries(int id) {
+        Customer customer = getById(id);
+
+        if (customer == null)
+            return new ArrayList<>();
+
+        return customer.getDeliveries();
     }
 }

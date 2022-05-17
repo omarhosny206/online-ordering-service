@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,21 +32,11 @@ public class CustomerController {
 
     @GetMapping("/{id}/orders")
     public List<Order> getAllOrders(@PathVariable int id) {
-        Customer customer = customerService.getById(id);
-
-        if (customer == null)
-            return new ArrayList<>();
-
-        return customer.getOrders();
+        return customerService.getAllOrders(id);
     }
 
     @GetMapping("/{id}/deliveries")
     public List<Delivery> getAllDeliveries(@PathVariable int id) {
-        Customer customer = customerService.getById(id);
-
-        if (customer == null)
-            return new ArrayList<>();
-
-        return customer.getDeliveries();
+        return customerService.getAllDeliveries(id);
     }
 }
