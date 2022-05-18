@@ -22,7 +22,7 @@ public class Product {
 
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JsonIgnore
     private Category category;
 
@@ -33,4 +33,11 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Order> orders;
+
+    public Product clone(Product product) {
+        product.setCategory(this.category);
+        product.setSellerProducts(this.sellerProducts);
+        product.setOrders(this.orders);
+        return product;
+    }
 }
