@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="online-ordering-system" target="17" />
+      <module name="online-ordering-system" target="15" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
