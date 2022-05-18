@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/delveries")
+@RequestMapping("/api/deliveries")
 public class DeliveryController {
     private DeliveryService deliveryService;
 
@@ -36,18 +36,18 @@ public class DeliveryController {
     }
 
     @GetMapping("/{id}/orders")
-    public List<Order> getAllOrders(@PathVariable int id) {
-        return deliveryService.getAllOrders(id);
+    public List<Order> getOrders(@PathVariable int id) {
+        return deliveryService.getOrders(id);
     }
 
     @GetMapping("/{id}/products")
-    public List<Product> getAllProducts(@PathVariable int id) {
-        return deliveryService.getAllProducts(id);
+    public List<Product> getProducts(@PathVariable int id) {
+        return deliveryService.getProducts(id);
     }
 
     @GetMapping("/{id}/sellers")
-    public List<Seller> getAllSellers(@PathVariable int id) {
-        return deliveryService.getAllSellers(id);
+    public List<Seller> getSellers(@PathVariable int id) {
+        return deliveryService.getSellers(id);
     }
 
     @GetMapping("/{id}/total-price")

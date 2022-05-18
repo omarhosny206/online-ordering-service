@@ -39,7 +39,7 @@ public class DeliveryService {
         return delivery.getCustomer();
     }
 
-    public List<Order> getAllOrders(int id) {
+    public List<Order> getOrders(int id) {
         Delivery delivery = getById(id);
 
         if (delivery == null)
@@ -48,9 +48,9 @@ public class DeliveryService {
         return delivery.getOrders();
     }
 
-    public List<Product> getAllProducts(int id) {
+    public List<Product> getProducts(int id) {
         List<Product> products = new ArrayList<>();
-        List<Order> orders = getAllOrders(id);
+        List<Order> orders = getOrders(id);
 
         if (orders.size() == 0)
             return new ArrayList<>();
@@ -59,9 +59,9 @@ public class DeliveryService {
         return products;
     }
 
-    public List<Seller> getAllSellers(int id) {
+    public List<Seller> getSellers(int id) {
         List<Seller> sellers = new ArrayList<>();
-        List<Order> orders = getAllOrders(id);
+        List<Order> orders = getOrders(id);
 
         if (orders.size() == 0)
             return new ArrayList<>();
@@ -72,8 +72,8 @@ public class DeliveryService {
 
     public int getTotalPrice(int id) {
         int totalPrice = 0;
-        List<Product> products = getAllProducts(id);
-        List<Seller> sellers = getAllSellers(id);
+        List<Product> products = getProducts(id);
+        List<Seller> sellers = getSellers(id);
 
         if (products.size() == 0)
             return 0;

@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.model.Customer;
 import com.example.model.Delivery;
 import com.example.model.Order;
+import com.example.model.Product;
 import com.example.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,8 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public List<Order> getAllOrders(int id) {
+
+    public List<Order> getOrders(int id) {
         Customer customer = getById(id);
 
         if (customer == null)
@@ -47,7 +49,18 @@ public class CustomerService {
         return customer.getOrders();
     }
 
-    public List<Delivery> getAllDeliveries(int id) {
+    public List<Product> getProducts(int id) {
+        List<Product> products = new ArrayList<>();
+        List<Order> orders = getOrders(id);
+
+        if (orders == null)
+            return new ArrayList<>();
+
+        orders.stream().forEach(order -> products.add(order.getProduct()));
+        return products;
+    }
+
+    public List<Delivery> getDeliveries(int id) {
         Customer customer = getById(id);
 
         if (customer == null)

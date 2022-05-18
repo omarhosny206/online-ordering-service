@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.model.Customer;
 import com.example.model.Delivery;
 import com.example.model.Order;
+import com.example.model.Product;
 import com.example.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,13 +45,18 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}/orders")
-    public List<Order> getAllOrders(@PathVariable int id) {
-        return customerService.getAllOrders(id);
+    public List<Order> getOrders(@PathVariable int id) {
+        return customerService.getOrders(id);
+    }
+
+    @GetMapping("/{id}/products")
+    public List<Product> getProducts(@PathVariable int id) {
+        return customerService.getProducts(id);
     }
 
     @GetMapping("/{id}/deliveries")
-    public List<Delivery> getAllDeliveries(@PathVariable int id) {
-        return customerService.getAllDeliveries(id);
+    public List<Delivery> getDeliveries(@PathVariable int id) {
+        return customerService.getDeliveries(id);
     }
 
     @PostMapping("/{id}/order")
