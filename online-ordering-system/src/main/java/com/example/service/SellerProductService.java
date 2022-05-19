@@ -38,6 +38,8 @@ public class SellerProductService {
     public void save(SellerProduct sellerProduct) {
         Seller seller = sellerRepository.findById(sellerProduct.getSellerProductId().getSellerId()).orElse(null);
         Product product = productRepository.findById(sellerProduct.getSellerProductId().getProductId()).orElse(null);
+        if(seller == null || product == null)
+            return;
         sellerProduct.setSeller(seller);
         sellerProduct.setProduct(product);
         sellerProductRepository.save(sellerProduct);
