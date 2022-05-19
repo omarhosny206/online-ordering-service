@@ -1,14 +1,10 @@
 package com.example.controller;
 
-import com.example.model.Customer;
-import com.example.model.Order;
-import com.example.repository.CustomerRepository;
+import com.example.model.*;
 import com.example.service.CustomerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -16,7 +12,7 @@ import java.util.List;
 public class CustomerController {
     private CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -30,13 +26,50 @@ public class CustomerController {
         return customerService.getById(id);
     }
 
-    @GetMapping("/orders")
-    public List<Order> getAllOrders(int id) {
-        Customer customer = getById(id);
+    @PostMapping("/")
+    public Customer save(@RequestBody Customer customer) {
+        return customerService.save(customer);
+    }
 
-        if (customer == null)
-            return null;
+    @PutMapping("/")
+    public Customer update(@RequestBody Customer customer) {
+        return customerService.update(customer);
+    }
 
-        return customer.getOrders();
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable int id) {
+        customerService.deleteById(id);
+    }
+
+    @GetMapping("/{id}/orders")
+    public List<Order> getOrders(@PathVariable int id) {
+        return customerService.getOrders(id);
+    }
+
+    @GetMapping("/{id}/products")
+    public List<Product> getProducts(@PathVariable int id) {
+        return customerService.getProducts(id);
+    }
+
+    @GetMapping("/{id}/deliveries")
+    public List<Delivery> getDeliveries(@PathVariable int id) {
+        return customerService.getDeliveries(id);
+    }
+
+    @GetMapping("/{id}/payments")
+    public List<Payment> getPayments(@PathVariable int id) {
+        return customerService.getPayments(id);
+    }
+
+    @PostMapping("/{id}/order")
+    @Transactional
+    public Order addOrder(@PathVariable int id) {
+        return customerService.addOrder(id);
+    }
+
+    @PostMapping("/{id}/delivery")
+    @Transactional
+    public void addDelivery(@PathVariable int id) {
+        customerService.addDelivery(id);
     }
 }
