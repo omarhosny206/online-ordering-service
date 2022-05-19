@@ -73,7 +73,7 @@ public class OrderController {
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") int id) {
-        orderService.delete(id);
+        orderService.deleteById(id);
     }
 
 }

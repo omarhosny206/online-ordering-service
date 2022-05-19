@@ -89,10 +89,10 @@ public class OrderService {
         );
     }
 
-    public void delete(int id) {
+    public void deleteById(int id) {
         Optional<Order> order = orderRepository.findById(id);
         if(order.isEmpty())
             throw new IllegalArgumentException("Order with id " + id + " does not exist");
-        orderRepository.delete(order.get());
+        orderRepository.deleteById(id);
     }
 }
