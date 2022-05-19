@@ -5,6 +5,7 @@ import com.example.repository.DeliveryRepository;
 import com.example.repository.SellerProductRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,5 +85,19 @@ public class DeliveryService {
         }
 
         return totalPrice;
+    }
+
+    @Transactional
+    public Payment addPayment(int id) {
+        Payment payment = new Payment();
+        Delivery delivery= getById(id);
+
+        if(delivery == null)
+            return null;
+
+        payment.setDelivery(delivery);
+        payment.setAmount(getTotalPrice(delivery.getId()));
+        delivery.setPayment(payment);
+        return payment;
     }
 }

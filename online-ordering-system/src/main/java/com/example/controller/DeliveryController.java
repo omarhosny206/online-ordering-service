@@ -4,6 +4,7 @@ import com.example.model.*;
 import com.example.service.DeliveryService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -53,5 +54,11 @@ public class DeliveryController {
     @GetMapping("/{id}/total-price")
     public int getTotalPrice(@PathVariable int id) {
         return deliveryService.getTotalPrice(id);
+    }
+
+    @PostMapping("/{id}/payment")
+    @Transactional
+    public Payment addPayment(@PathVariable int id) {
+        return deliveryService.addPayment(id);
     }
 }

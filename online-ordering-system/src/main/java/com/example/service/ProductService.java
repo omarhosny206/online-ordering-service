@@ -37,7 +37,7 @@ public class ProductService {
     public Product update(Product product) {
         Product old = getById(product.getId());
 
-        if(old == null)
+        if (old == null)
             return null;
 
         return productRepository.save(old.clone(product));
@@ -60,7 +60,7 @@ public class ProductService {
         List<Seller> sellers = new ArrayList<>();
         List<SellerProduct> sellerProducts = sellerProductRepository.findAllByProductId(id);
 
-        if(sellerProducts == null)
+        if (sellerProducts == null)
             return new ArrayList<>();
 
         sellerProducts.stream().forEach(sellerProduct -> sellers.add(sellerProduct.getSeller()));
@@ -71,7 +71,7 @@ public class ProductService {
         List<Double> prices = new ArrayList<>();
         List<SellerProduct> sellerProducts = sellerProductRepository.findAllByProductId(id);
 
-        if(sellerProducts == null)
+        if (sellerProducts == null)
             return new ArrayList<>();
 
         sellerProducts.stream().sorted((s1, s2) -> (int) (s1.getPrice() - s2.getPrice())).forEach(sellerProduct -> prices.add(sellerProduct.getPrice()));
@@ -82,7 +82,7 @@ public class ProductService {
         List<SellerProduct> sellerProducts = new ArrayList<>();
         Product product = getById(id);
 
-        if(product == null)
+        if (product == null)
             return new ArrayList<>();
 
         sellerProducts = product.getSellerProducts();
@@ -117,7 +117,7 @@ public class ProductService {
         Product product = getById(id);
         List<Order> orders = new ArrayList<>();
 
-        if(product == null)
+        if (product == null)
             return new ArrayList<>();
 
         orders = product.getOrders();
@@ -130,7 +130,7 @@ public class ProductService {
         Product product = getById(id);
         Category category = categoryRepository.getById(categoryId);
 
-        if(product == null || category == null)
+        if (product == null || category == null)
             return null;
 
         product.setCategory(category);
@@ -142,7 +142,7 @@ public class ProductService {
         Order order = new Order();
         Product product = getById(id);
 
-        if(product == null)
+        if (product == null)
             return null;
 
         product.getOrders().add(order);

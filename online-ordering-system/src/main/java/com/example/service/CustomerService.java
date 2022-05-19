@@ -1,9 +1,6 @@
 package com.example.service;
 
-import com.example.model.Customer;
-import com.example.model.Delivery;
-import com.example.model.Order;
-import com.example.model.Product;
+import com.example.model.*;
 import com.example.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +11,11 @@ import java.util.List;
 @Service
 public class CustomerService {
     private CustomerRepository customerRepository;
+    private DeliveryService deliveryService;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, DeliveryService deliveryService) {
         this.customerRepository = customerRepository;
+        this.deliveryService = deliveryService;
     }
 
     public List<Customer> getAll() {
@@ -67,6 +66,28 @@ public class CustomerService {
             return new ArrayList<>();
 
         return customer.getDeliveries();
+    }
+
+    public List<Payment> getPayments(int id) {
+        List<Payment> payments = new ArrayList<>();
+        Customer customer = getById(id);
+        List<Delivery> deliveries = new ArrayList<>();
+
+        if (customer == null)
+            return new ArrayList<>();
+
+        deliveries = customer.getDeliveries();
+
+        deliveries.stream().forEach(delivery -> {
+            Payment payment = delivery.getPayment();
+            if (payment != null) {
+                payment.setAmount(deliveryService.getTotalPrice(delivery.getId()));
+                payments.add(payment);
+            }
+
+        });
+
+        return payments;
     }
 
     @Transactional

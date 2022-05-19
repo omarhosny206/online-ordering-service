@@ -1,9 +1,6 @@
 package com.example.controller;
 
-import com.example.model.Customer;
-import com.example.model.Delivery;
-import com.example.model.Order;
-import com.example.model.Product;
+import com.example.model.*;
 import com.example.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +54,11 @@ public class CustomerController {
     @GetMapping("/{id}/deliveries")
     public List<Delivery> getDeliveries(@PathVariable int id) {
         return customerService.getDeliveries(id);
+    }
+
+    @GetMapping("/{id}/payments")
+    public List<Payment> getPayments(@PathVariable int id) {
+        return customerService.getPayments(id);
     }
 
     @PostMapping("/{id}/order")
