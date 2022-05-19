@@ -71,6 +71,15 @@ public class DeliveryService {
         return sellers;
     }
 
+    public Payment getPayment(int id) {
+        Delivery delivery = getById(id);
+
+        if (delivery == null)
+            return null;
+
+        return delivery.getPayment();
+    }
+
     public int getTotalPrice(int id) {
         int totalPrice = 0;
         List<Product> products = getProducts(id);
@@ -90,9 +99,9 @@ public class DeliveryService {
     @Transactional
     public Payment addPayment(int id) {
         Payment payment = new Payment();
-        Delivery delivery= getById(id);
+        Delivery delivery = getById(id);
 
-        if(delivery == null)
+        if (delivery == null)
             return null;
 
         payment.setDelivery(delivery);

@@ -51,6 +51,11 @@ public class DeliveryController {
         return deliveryService.getSellers(id);
     }
 
+    @GetMapping("/{id}/payment")
+    public Payment getPayment(@PathVariable int id) {
+        return deliveryService.getPayment(id);
+    }
+
     @GetMapping("/{id}/total-price")
     public int getTotalPrice(@PathVariable int id) {
         return deliveryService.getTotalPrice(id);
