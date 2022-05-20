@@ -105,7 +105,6 @@ public class DeliveryService {
             return null;
 
         payment.setDelivery(delivery);
-        payment.setAmount(getTotalPrice(delivery.getId()));
         delivery.setPayment(payment);
         return payment;
     }

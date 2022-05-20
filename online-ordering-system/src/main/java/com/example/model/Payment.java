@@ -25,8 +25,8 @@ public class Payment {
     @JsonIgnore
     private Delivery delivery;
 
-    @ColumnDefault(value = "0.0")
-    private double amount;
+//    @ColumnDefault(value = "0.0")
+//    private double amount;
 
     @Column(nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")

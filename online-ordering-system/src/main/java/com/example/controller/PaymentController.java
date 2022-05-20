@@ -33,4 +33,9 @@ public class PaymentController {
     public Customer getCustomer(@PathVariable int id) {
      return paymentService.getCustomer(id);
     }
+
+    @GetMapping("/{id}/total-price")
+    public double getTotalPrice(int id) {
+        return paymentService.getTotalPrice(id);
+    }
 }

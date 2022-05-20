@@ -26,6 +26,11 @@ public class CustomerController {
         return customerService.getById(id);
     }
 
+    @GetMapping("/search")
+    public List<Customer> getAllByFullName(@RequestParam String firstName,@RequestParam String lastName) {
+        return customerService.getAllByFullName(firstName, lastName);
+    }
+
     @PostMapping("/")
     public Customer save(@RequestBody Customer customer) {
         return customerService.save(customer);
@@ -59,12 +64,6 @@ public class CustomerController {
     @GetMapping("/{id}/payments")
     public List<Payment> getPayments(@PathVariable int id) {
         return customerService.getPayments(id);
-    }
-
-    @PostMapping("/{id}/order")
-    @Transactional
-    public Order addOrder(@PathVariable int id) {
-        return customerService.addOrder(id);
     }
 
     @PostMapping("/{id}/delivery")

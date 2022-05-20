@@ -26,6 +26,15 @@ public class CustomerService {
         return customerRepository.findById(id).orElse(null);
     }
 
+    public List<Customer> getAllByFullName(String firstName, String lastName) {
+        List<Customer> customers = customerRepository.findAllByFirstNameAndLastNameIgnoreCase(firstName, lastName);
+
+        if(customers == null)
+            return new ArrayList<>();
+
+        return customers;
+    }
+
     public Customer save(Customer customer) {
         return customerRepository.save(customer);
     }
@@ -81,26 +90,12 @@ public class CustomerService {
         deliveries.stream().forEach(delivery -> {
             Payment payment = delivery.getPayment();
             if (payment != null) {
-                payment.setAmount(deliveryService.getTotalPrice(delivery.getId()));
                 payments.add(payment);
             }
 
         });
 
         return payments;
-    }
-
-    @Transactional
-    public Order addOrder(int id) {
-        Order order = new Order();
-        Customer customer = getById(id);
-
-        if (customer == null)
-            return null;
-
-        customer.getOrders().add(order);
-        order.setCustomer(customer);
-        return order;
     }
 
     @Transactional
