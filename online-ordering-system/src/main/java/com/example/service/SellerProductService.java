@@ -38,7 +38,7 @@ public class SellerProductService {
     public void save(SellerProduct sellerProduct) {
         Seller seller = sellerRepository.findById(sellerProduct.getSellerProductId().getSellerId()).orElse(null);
         Product product = productRepository.findById(sellerProduct.getSellerProductId().getProductId()).orElse(null);
-        if(seller == null || product == null)
+        if (seller == null || product == null)
             return;
         sellerProduct.setSeller(seller);
         sellerProduct.setProduct(product);
@@ -50,7 +50,7 @@ public class SellerProductService {
         SellerProduct sellerProductToUpdate = sellerProductRepository
                 .findById(new SellerProductId(sellerId, productId))
                 .orElse(null);
-        if(sellerProductToUpdate == null)
+        if (sellerProductToUpdate == null)
             return;
         sellerProductToUpdate.clone(sellerProduct);
     }

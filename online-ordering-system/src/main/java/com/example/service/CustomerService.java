@@ -29,7 +29,7 @@ public class CustomerService {
     public List<Customer> getAllByFullName(String firstName, String lastName) {
         List<Customer> customers = customerRepository.findAllByFirstNameAndLastNameIgnoreCase(firstName, lastName);
 
-        if(customers == null)
+        if (customers == null)
             return new ArrayList<>();
 
         return customers;

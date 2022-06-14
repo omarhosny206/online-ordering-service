@@ -30,7 +30,7 @@ public class SellerProduct implements Serializable {
     private double price;
 
     public void clone(SellerProduct sellerProduct) {
-        if(sellerProduct.price >= 0 && sellerProduct.price != this.price)
+        if (sellerProduct.price >= 0 && sellerProduct.price != this.price)
             this.price = sellerProduct.price;
     }
 }

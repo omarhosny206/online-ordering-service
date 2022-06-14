@@ -45,7 +45,7 @@ public class SellerService {
 
     public void deleteById(int id) {
         Optional<Seller> seller = sellerRepository.findById(id);
-        if(seller.isEmpty())
+        if (seller.isEmpty())
             throw new IllegalArgumentException("Seller with id " + id + " does not exist");
 
         sellerRepository.deleteById(id);
@@ -54,21 +54,21 @@ public class SellerService {
     public Set<Customer> getCustomers(int id) {
         Set<Customer> customers = new HashSet<>();
         List<Order> orders = getOrders(id);
-        for(Order order: orders)
+        for (Order order : orders)
             customers.add(order.getCustomer());
         return customers;
     }
 
     public List<Order> getOrders(int id) {
         Seller seller = sellerRepository.findById(id).orElse(null);
-        if(seller == null)
+        if (seller == null)
             return new ArrayList<>();
         return seller.getOrders();
     }
 
     public List<SellerProduct> getProducts(int id) {
         Seller seller = sellerRepository.findById(id).orElse(null);
-        if(seller == null)
+        if (seller == null)
             return new ArrayList<>();
         return seller.getSellerProducts();
     }

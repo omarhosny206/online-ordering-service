@@ -16,20 +16,16 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer", "fieldHandler"})
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String name;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Category category;
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     List<SellerProduct> sellerProducts;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Category category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Order> orders;

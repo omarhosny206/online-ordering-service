@@ -31,7 +31,7 @@ public class PaymentController {
 
     @GetMapping("/{id}/customer")
     public Customer getCustomer(@PathVariable int id) {
-     return paymentService.getCustomer(id);
+        return paymentService.getCustomer(id);
     }
 
     @GetMapping("/{id}/total-price")

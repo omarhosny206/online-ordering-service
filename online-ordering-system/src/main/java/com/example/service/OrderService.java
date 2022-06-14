@@ -36,28 +36,28 @@ public class OrderService {
 
     public Customer getCustomer(int id) {
         Order order = getById(id);
-        if(order != null)
+        if (order != null)
             return order.getCustomer();
         return null;
     }
 
     public Seller getSeller(int id) {
         Order order = getById(id);
-        if(order != null)
+        if (order != null)
             return order.getSeller();
         return null;
     }
 
     public Product getProduct(int id) {
         Order order = getById(id);
-        if(order != null)
+        if (order != null)
             return order.getProduct();
         return null;
     }
 
     public Delivery getDelivery(int id) {
         Order order = getById(id);
-        if(order != null)
+        if (order != null)
             return order.getDelivery();
         return null;
     }
@@ -91,7 +91,7 @@ public class OrderService {
 
     public void deleteById(int id) {
         Optional<Order> order = orderRepository.findById(id);
-        if(order.isEmpty())
+        if (order.isEmpty())
             throw new IllegalArgumentException("Order with id " + id + " does not exist");
         orderRepository.deleteById(id);
     }

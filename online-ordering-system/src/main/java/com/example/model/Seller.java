@@ -33,11 +33,11 @@ public class Seller {
     private List<SellerProduct> sellerProducts;
 
     public void clone(Seller seller) {
-        if(seller.firstName != null && !seller.firstName.isEmpty() && !this.firstName.equalsIgnoreCase(seller.firstName))
+        if (seller.firstName != null && !seller.firstName.isEmpty() && !this.firstName.equalsIgnoreCase(seller.firstName))
             this.firstName = seller.firstName;
-        if(seller.lastName != null && !seller.lastName.isEmpty() && !this.lastName.equalsIgnoreCase(seller.lastName))
+        if (seller.lastName != null && !seller.lastName.isEmpty() && !this.lastName.equalsIgnoreCase(seller.lastName))
             this.lastName = seller.lastName;
-        if(seller.email != null && !seller.email.isEmpty() && !this.email.equalsIgnoreCase(seller.email))
+        if (seller.email != null && !seller.email.isEmpty() && !this.email.equalsIgnoreCase(seller.email))
             this.email = seller.email;
     }
 }

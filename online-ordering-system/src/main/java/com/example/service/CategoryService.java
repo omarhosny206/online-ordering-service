@@ -34,16 +34,16 @@ public class CategoryService {
 
     public void delete(int id) {
         Category category = getById(id);
-        if(category == null)
+        if (category == null)
             throw new IllegalArgumentException("Category with id " + id + " does not exist");
         category.getProducts().forEach(p -> p.setCategory(null));
         categoryRepository.deleteById(id);
     }
 
     public List<Product> getProducts(int id) {
-        Category category=getById(id);
+        Category category = getById(id);
 
-        if(category==null)
+        if (category == null)
             return new ArrayList<>();
 
         return category.getProducts();

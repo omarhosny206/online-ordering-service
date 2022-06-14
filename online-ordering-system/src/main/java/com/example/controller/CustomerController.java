@@ -27,7 +27,7 @@ public class CustomerController {
     }
 
     @GetMapping("/search")
-    public List<Customer> getAllByFullName(@RequestParam String firstName,@RequestParam String lastName) {
+    public List<Customer> getAllByFullName(@RequestParam String firstName, @RequestParam String lastName) {
         return customerService.getAllByFullName(firstName, lastName);
     }
 

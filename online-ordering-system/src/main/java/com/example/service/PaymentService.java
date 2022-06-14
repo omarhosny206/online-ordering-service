@@ -39,7 +39,7 @@ public class PaymentService {
         Payment payment = getById(id);
         Delivery delivery = null;
 
-        if(payment == null)
+        if (payment == null)
             return 0;
 
         delivery = payment.getDelivery();
