@@ -47,7 +47,7 @@ public class SellerService {
         Optional<Seller> seller = sellerRepository.findById(id);
         if(seller.isEmpty())
             throw new IllegalArgumentException("Seller with id " + id + " does not exist");
-        seller.get().getOrders().forEach(order -> order.setSeller(null));
+
         sellerRepository.deleteById(id);
     }
 

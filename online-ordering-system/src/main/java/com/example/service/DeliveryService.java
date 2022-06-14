@@ -28,6 +28,10 @@ public class DeliveryService {
     }
 
     public void deleteById(int id) {
+        Delivery delivery = getById(id);
+        if (delivery == null)
+            throw new IllegalArgumentException("Delivery with id " + id + " does not exist");
+        delivery.getOrders().forEach( o -> o.setDelivery(null));
         deliveryRepository.deleteById(id);
     }
 
