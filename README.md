@@ -8,12 +8,7 @@
 - Ability to get all prices to the same product.
 
 # Database Design:
-
-<p align="center">  
-	<br>
-        <img height=200 width = 400 src="file:///C:/Users/Ahmed%20Hosny/Desktop/index.jpg"> 
-    <br>
-</p>
+![index](https://user-images.githubusercontent.com/58389695/183915634-15e2b0ea-a441-4309-88e6-e49ba31c869e.jpg)
 
 # Tech Stack:
 
@@ -24,3 +19,4 @@
 - API Documentation: Swagger
 
 You can see the API documentation through: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
+
