@@ -19,6 +19,7 @@
 
 - Programming Language: Java
 - Backend Framework: Spring Boot
+- ORM: Hibernate
 - Database Engine: MS SQL Server (It could be MySQL by changing the configuration)
 - API Documentation: Swagger
 
