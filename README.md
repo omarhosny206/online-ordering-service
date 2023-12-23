@@ -17,18 +17,6 @@
 This platform offers a seamless experience for customers to browse, order, and manage their purchases. Additionally,
 sellers have access to tools for managing their inventory and interacting with customers. Below are the key features
 provided by the system:
-
-## **Usage**
-- Run in **development** environment:
-  ```shell
-  docker-compose -f docker-compose-dev.yaml up -d --build
-  # to stop --> docker-compose -f docker-compose-dev.yaml down
-  ```
-- Run in **production** environment:
-  ```shell
-  docker-compose up -d --build
-  # to stop --> docker-compose down
-  ```
   
 ## **Features**
 
@@ -80,8 +68,30 @@ provided by the system:
 
 These features collectively provide a comprehensive online ordering experience, with secure authentication and role-based authorization tailored to the specific needs of administrators, sellers, and customers. Feel free to explore and make the most of your online shopping and selling experience!
 
-## **CI/CD**
+## **Usage**
+- Run in **development** environment:
+  ```shell
+  docker-compose -f docker-compose-dev.yaml up -d --build
+  # to stop --> docker-compose -f docker-compose-dev.yaml down
+  ```
+- Run in **production** environment:
+  ```shell
+  docker-compose up -d --build
+  # to stop --> docker-compose down
+  ```
+
+## **CI/CD 🚀** [`🔗`](./.github/workflows/cicd.yaml)
 ![CICD](https://github.com/omarhosny206/omarhosny206/assets/58389695/3e00292e-6229-41f2-aad8-2ee1ebfe9ec0)
+  - **CI**:
+    - Checkout the code.
+    - Login to dockerhub.
+    -  Build the docker image.
+    - Push the docker image to dockerhub. 
+  - **CD** (on AWS EC2 Ubuntu machine as GitHub Actions Self-hosted Runner):
+    - Stop & Remove existing containers.
+    - Delete existing images.
+    - Checkout the code.
+    - Run the containers via docker-compose.yaml file.
 
 ## **Database Design**
 ![DB_DIAGRAM](https://github.com/omarhosny206/github-actions/assets/58389695/4f216cfe-9aed-4893-b079-c7247df11890)
@@ -92,9 +102,9 @@ These features collectively provide a comprehensive online ordering experience, 
 - Database Engine: PostgreSQL
 - Other Frameworks: Spring Security Data JPA, Hibernate
 - API Documentation: Swagger via OpenApi 3.0
-- Containerization and Orchestration: Docker, Kubernetes
+- Containerization and Orchestration: Docker [`🔗`](./Dockerfile) [`🔗`](./docker-compose.yaml), Kubernetes [`🔗`](./k8s)
 - Cloud: AWS (EC2 Ubuntu Machine)
-- CI/CD: GitHub Actions
+- CI/CD: GitHub Actions [`🔗`](./.github/workflows/cicd.yaml)
 - Operating System: Ubuntu
 
 ## **Features to add in the future 💭**
