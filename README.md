@@ -54,7 +54,7 @@ provided by the system:
 
 These features collectively provide a comprehensive online ordering experience, with secure authentication and role-based authorization tailored to the specific needs of administrators, sellers, and customers. Feel free to explore and make the most of your online shopping and selling experience!
 
-## Database Design:
+## Database Design
 
 ![DB_DIAGRAM](https://github.com/omarhosny206/github-actions/assets/58389695/4f216cfe-9aed-4893-b079-c7247df11890)
 
