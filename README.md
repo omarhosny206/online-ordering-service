@@ -87,7 +87,7 @@ These features collectively provide a comprehensive online ordering experience, 
     - Login to dockerhub.
     -  Build the docker image.
     - Push the docker image to dockerhub. 
-  - **CD** (on AWS EC2 Ubuntu machine as GitHub Actions Self-hosted Runner):
+  - **CD** (on AWS EC2 Ubuntu machine as GitHub Actions Self-hosted Runner [`🔗`](./setup-github-actions-runner.sh)):
     - Stop & Remove existing containers.
     - Delete existing images.
     - Checkout the code.
@@ -104,7 +104,7 @@ These features collectively provide a comprehensive online ordering experience, 
 - API Documentation: Swagger via OpenApi 3.0
 - Containerization and Orchestration: Docker [`🔗`](./Dockerfile) [`🔗`](./docker-compose.yaml), Kubernetes [`🔗`](./k8s)
 - Cloud: AWS (EC2 Ubuntu Machine)
-- CI/CD: GitHub Actions [`🔗`](./.github/workflows/cicd.yaml)
+- CI/CD: GitHub Actions [`🔗`](./.github/workflows/cicd.yaml) [`🔗`](./setup-github-actions-runner.sh)
 - Operating System: Ubuntu
 
 ## **Features to add in the future 💭**
