@@ -54,11 +54,13 @@ provided by the system:
 
 These features collectively provide a comprehensive online ordering experience, with secure authentication and role-based authorization tailored to the specific needs of administrators, sellers, and customers. Feel free to explore and make the most of your online shopping and selling experience!
 
-# Database Design:
+## Database Design:
 
 ![DB_DIAGRAM](https://github.com/omarhosny206/github-actions/assets/58389695/4f216cfe-9aed-4893-b079-c7247df11890)
 
-# **Tech Stack ⚡**
+## CI/CD
+![CICD](https://github.com/omarhosny206/omarhosny206/assets/58389695/3e00292e-6229-41f2-aad8-2ee1ebfe9ec0)
+## **Tech Stack ⚡**
 
 - Programming Language: Java 17
 - Backend Framework: Spring Boot v3.1.2
@@ -87,9 +89,9 @@ These features collectively provide a comprehensive online ordering experience, 
 ![AWS](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
-# **Features to add in the future 💭**
+## **Features to add in the future 💭**
 
 - Adding OAuth 2.0.
 - Signup with Google, Facebook and other platforms.
 
-# API Documentation 📝 via [|Swagger|](http://localhost:8080/swagger-ui/index.html#/)
+## API Documentation 📝 via [|Swagger|](http://localhost:8080/swagger-ui/index.html#/)
