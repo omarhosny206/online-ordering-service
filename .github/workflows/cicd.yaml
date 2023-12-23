@@ -34,7 +34,5 @@ jobs:
         run: docker rm -f $(docker ps -aq | grep -v "$(docker ps -aq -f "name=runner")") || true
       - name: Delete existing docker images
         run: docker rmi -f $(docker image ls -q --format '{{.Repository}}:{{.Tag}}' | grep -v "runner") || true
-      - name: Pull docker image
-        run: docker pull $DOCKERHUB_USERNAME/express-end2end:${{ github.sha }}
-      - name: Run docker container
+      - name: Run docker containers
         run: docker-compose up -d --build
