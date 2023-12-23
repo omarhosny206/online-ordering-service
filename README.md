@@ -18,7 +18,7 @@ This platform offers a seamless experience for customers to browse, order, and m
 sellers have access to tools for managing their inventory and interacting with customers. Below are the key features
 provided by the system:
 
-## Features
+## **Features**
 
 ### Customer Features:
 
@@ -68,12 +68,12 @@ provided by the system:
 
 These features collectively provide a comprehensive online ordering experience, with secure authentication and role-based authorization tailored to the specific needs of administrators, sellers, and customers. Feel free to explore and make the most of your online shopping and selling experience!
 
-## Database Design
+## **CI/CD**
+![CICD](https://github.com/omarhosny206/omarhosny206/assets/58389695/3e00292e-6229-41f2-aad8-2ee1ebfe9ec0)
 
+## **Database Design**
 ![DB_DIAGRAM](https://github.com/omarhosny206/github-actions/assets/58389695/4f216cfe-9aed-4893-b079-c7247df11890)
 
-## CI/CD
-![CICD](https://github.com/omarhosny206/omarhosny206/assets/58389695/3e00292e-6229-41f2-aad8-2ee1ebfe9ec0)
 ## **Tech Stack ⚡**
 
 - Programming Language: Java 17
