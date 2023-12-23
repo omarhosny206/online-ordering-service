@@ -31,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
     public Role getByName(String name) {
         Role role = getByNameOrNull(name);
         if (role == null) {
-            ApiError.notFound("Role not found with name=" + name);
+            throw ApiError.notFound("Role not found with name=" + name);
         }
         return role;
     }
@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
     public Role save(RoleDto roleDto) {
         Role savedRole = getByNameOrNull(roleDto.getName());
         if (savedRole != null) {
-            ApiError.conflict("Role already exists with this name");
+            throw ApiError.conflict("Role already exists with this name");
         }
         Role role = new Role(roleDto.getName());
         return save(role);
