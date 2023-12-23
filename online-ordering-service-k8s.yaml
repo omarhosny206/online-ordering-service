@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: online-ordering-service
+  labels:
+    app: online-ordering-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: online-ordering-service
+  template:
+    metadata:
+      labels:
+        app: online-ordering-service
+    spec:
+      containers:
+        - name: online-ordering-service
+          image: omarhosny102/online-ordering-service:latest
+          env:
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: host
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: db-name
+          ports:
+            - containerPort: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: online-ordering-service-service
+  labels:
+    app: online-ordering-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30016
+  selector:
+    app: online-ordering-service
+  type: LoadBalancer
