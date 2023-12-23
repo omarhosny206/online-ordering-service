@@ -22,10 +22,12 @@ provided by the system:
 - Run in **development** environment:
   ```shell
   docker-compose -f docker-compose-dev.yaml up -d --build
+  # to stop --> docker-compose -f docker-compose-dev.yaml down
   ```
 - Run in **production** environment:
   ```shell
   docker-compose up -d --build
+  # to stop --> docker-compose down
   ```
   
 ## **Features**
