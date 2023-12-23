@@ -34,5 +34,7 @@ jobs:
         run: docker rm -f $(docker ps -aq | grep -v "$(docker ps -aq -f "name=runner")") || true
       - name: Delete existing docker images
         run: docker rmi -f $(docker image ls -q --format '{{.Repository}}:{{.Tag}}' | grep -v "runner") || true
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Run docker containers
         run: docker-compose up -d --build
