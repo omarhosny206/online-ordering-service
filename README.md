@@ -18,9 +18,9 @@ This platform offers a seamless experience for customers to browse, order, and m
 sellers have access to tools for managing their inventory and interacting with customers. Below are the key features
 provided by the system:
   
-## **Features**
+## **Features 🌟**
 
-- ### Customer Features:
+- ### Customer Features 🛒:
 
   - **User Cart Management:**
     - **View Cart:** Customers can view their shopping cart, displaying the products they've added.
@@ -47,7 +47,7 @@ provided by the system:
     - **Sign In:** Users can sign in to the system using JWT (JSON Web Tokens) for secure authentication.
     - **Token Management:** Users can obtain authentication tokens for secure access and can refresh tokens later.
 
-- ### Seller Features:
+- ### Seller Features 📦:
 
   - **Seller Product Management:**
     - **View Seller Products:** Sellers can view a list of products they are selling.
@@ -55,12 +55,12 @@ provided by the system:
     - **Update Seller Product:** Sellers can update information about the products they are selling.
     - **Delete Seller Product:** Sellers can remove products from their inventory.
 
-- ### Authentication and Authorization:
+- ### Authentication and Authorization 🔐:
 
-  - **Authentication Using JWT:**
+  - **Authentication Using JWT ✅:**
     - The system employs JSON Web Tokens for secure user authentication, ensuring a reliable and secure login process.
 
-  - **Role-based Authorization:**
+  - **Role-based Authorization 🧑‍👧‍👦:**
     - The system implements role-based authorization with three roles: Admin, Seller, and Customer.
     - **Admin:** Has access to administrative functionalities, such as adding categories and managing products.
     - **Seller:** Can manage their products, view and update product information.
@@ -68,7 +68,7 @@ provided by the system:
 
 These features collectively provide a comprehensive online ordering experience, with secure authentication and role-based authorization tailored to the specific needs of administrators, sellers, and customers. Feel free to explore and make the most of your online shopping and selling experience!
 
-## **Usage**
+## **Usage 🛠️**
 - Run in **development** environment:
   ```shell
   docker-compose -f docker-compose-dev.yaml up -d --build
@@ -93,7 +93,7 @@ These features collectively provide a comprehensive online ordering experience, 
     - Checkout the code.
     - Run the containers via docker-compose.yaml file.
 
-## **Database Design**
+## **Database Design 📝**
 ![DB_DIAGRAM](https://github.com/omarhosny206/github-actions/assets/58389695/4f216cfe-9aed-4893-b079-c7247df11890)
 
 ## **Tech Stack ⚡**
