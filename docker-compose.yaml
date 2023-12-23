@@ -2,9 +2,8 @@ version: '3.8'
 
 services:
   online-ordering-service:
-    image: online-ordering-service:latest
+    image: omarhosny102/online-ordering-service:latest
     container_name: online-ordering-service
-    build: .
     environment:
       - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
