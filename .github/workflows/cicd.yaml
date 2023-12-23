@@ -1,0 +1,40 @@
+name: CICD Pipeline/Workflow
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  ci-build-and-push-docker-image:
+    runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Login to docker
+        run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+      - name: Build docker image
+        run: |
+          docker build -t $DOCKERHUB_USERNAME/online-ordering-service:latest .
+          docker build -t $DOCKERHUB_USERNAME/online-ordering-service:${{ github.sha }} .
+      - name: Push docker image to dockerhub
+        run: |
+          docker push $DOCKERHUB_USERNAME/online-ordering-service:latest 
+          docker push $DOCKERHUB_USERNAME/online-ordering-service:${{ github.sha }}
+  cd-deploy-container-to-ec2:
+    runs-on: self-hosted  # Note: you can replace "self-hosted" with the label of your self-hosted runner
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+    needs: ci-build-and-push-docker-image
+    steps:
+      - name: Remove existing docker containers
+        run: docker rm -f $(docker ps -aq | grep -v "$(docker ps -aq -f "name=runner")") || true
+      - name: Delete existing docker images
+        run: docker rmi -f $(docker image ls -q --format '{{.Repository}}:{{.Tag}}' | grep -v "runner") || true
+      - name: Pull docker image
+        run: docker pull $DOCKERHUB_USERNAME/express-end2end:${{ github.sha }}
+      - name: Run docker container
+        run: docker-compose up -d --build
