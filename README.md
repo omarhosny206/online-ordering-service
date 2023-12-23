@@ -18,6 +18,16 @@ This platform offers a seamless experience for customers to browse, order, and m
 sellers have access to tools for managing their inventory and interacting with customers. Below are the key features
 provided by the system:
 
+## **Usage**
+- Run in **development** environment:
+  ```shell
+  docker-compose -f docker-compose-dev.yaml up -d --build
+  ```
+- Run in **production** environment:
+  ```shell
+  docker-compose up -d --build
+  ```
+  
 ## **Features**
 
 - ### Customer Features:
@@ -75,7 +85,6 @@ These features collectively provide a comprehensive online ordering experience, 
 ![DB_DIAGRAM](https://github.com/omarhosny206/github-actions/assets/58389695/4f216cfe-9aed-4893-b079-c7247df11890)
 
 ## **Tech Stack ⚡**
-
 - Programming Language: Java 17
 - Backend Framework: Spring Boot v3.1.2
 - Database Engine: PostgreSQL
@@ -87,7 +96,6 @@ These features collectively provide a comprehensive online ordering experience, 
 - Operating System: Ubuntu
 
 ## **Features to add in the future 💭**
-
 - Adding OAuth 2.0.
 - Signup with Google, Facebook and other platforms.
 
