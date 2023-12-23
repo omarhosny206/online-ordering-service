@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "``order_product`")
+@Table(name = "`order_product`")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,8 +22,24 @@ public class OrderProduct implements Serializable {
     private Order order;
 
     @ManyToOne
+    @MapsId("sellerId")
+    private User seller;
+
+    @ManyToOne
     @MapsId("productId")
     private Product product;
 
+    @Column(nullable = false)
     private double price;
+
+    @Column(nullable = false)
+    private int quantity;
+
+    public OrderProduct(OrderProductId orderProductId, Order order, User seller, Product product, double price) {
+        this.orderProductId = orderProductId;
+        this.order = order;
+        this.seller = seller;
+        this.product = product;
+        this.price = price;
+    }
 }

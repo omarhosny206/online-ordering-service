@@ -1,17 +1,27 @@
 package com.example.controller;
 
-import com.example.entity.UserProduct;
-import com.example.service.impl.SellerProductService;
+import com.example.dto.SellerProductDto;
+import com.example.dto.UpdateSellerProductDto;
+import com.example.entity.SellerProduct;
+import com.example.response.MessageResponse;
+import com.example.service.SellerProductService;
+import com.example.util.AuthenticationUser;
+import com.example.util.SellerProductId;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sellersProducts")
+@RequestMapping("/api/sellers-products")
+@PreAuthorize("hasAnyAuthority('seller')")
 public class SellerProductController {
-
-    private SellerProductService sellerProductService;
+    private final SellerProductService sellerProductService;
 
     @Autowired
     public SellerProductController(SellerProductService sellerProductService) {
@@ -19,31 +29,38 @@ public class SellerProductController {
     }
 
     @GetMapping("/")
-    public List<UserProduct> getAll() {
-        return sellerProductService.getAll();
+    public ResponseEntity<List<SellerProduct>> getAll() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(sellerProductService.getAll());
     }
 
-    @GetMapping("/{sellerId}/{productId}")
-    public UserProduct getById(@PathVariable("sellerId") int sellerId, @PathVariable("productId") int productId) {
-        return sellerProductService.getById(sellerId, productId);
+    @GetMapping("/{productId}")
+    public ResponseEntity<SellerProduct> getById(Authentication authentication, @PathVariable long productId) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(sellerProductService.getById(new SellerProductId(AuthenticationUser.get(authentication).getId(), productId)));
     }
 
     @PostMapping("/")
-    public void save(@RequestBody UserProduct userProduct) {
-        sellerProductService.save(userProduct);
+    public ResponseEntity<SellerProduct> save(Authentication authentication, @Valid @RequestBody SellerProductDto sellerProductDto) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(sellerProductService.save(AuthenticationUser.get(authentication), sellerProductDto));
     }
 
-    @PutMapping("/{sellerId}/{productId}")
-    public void update(
-            @PathVariable("sellerId") int sellerId,
-            @PathVariable("productId") int productId,
-            @RequestBody UserProduct userProduct
-    ) {
-        sellerProductService.update(sellerId, productId, userProduct);
+    @PutMapping("/{productId}")
+    public ResponseEntity<SellerProduct> update(Authentication authentication, @PathVariable int productId, @Valid @RequestBody UpdateSellerProductDto updateSellerProductDto) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(sellerProductService.update(AuthenticationUser.get(authentication), productId, updateSellerProductDto));
     }
 
-    @DeleteMapping("/{sellerId}/{productId}")
-    public void delete(@PathVariable("sellerId") int sellerId, @PathVariable("productId") int productId) {
-        sellerProductService.delete(sellerId, productId);
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<MessageResponse> delete(Authentication authentication, @PathVariable int productId) {
+        sellerProductService.deleteByProductId(AuthenticationUser.get(authentication), productId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new MessageResponse("Deleted successfully"));
     }
 }

@@ -14,8 +14,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class OrderProductId implements Serializable {
     @Column(name = "order_id")
-    private int orderId;
+    private long orderId;
+
+    @Column(name = "seller_id")
+    private long sellerId;
 
     @Column(name = "product_id")
-    private int productId;
+    private long productId;
 }

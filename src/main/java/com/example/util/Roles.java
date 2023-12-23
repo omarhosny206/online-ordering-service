@@ -1,8 +1,9 @@
 package com.example.util;
 
 public enum Roles {
-    AUTHOR("author"),
-    READER("reader");
+    ADMIN("admin"),
+    SELLER("seller"),
+    CUSTOMER("customer");
 
     private final String value;
 

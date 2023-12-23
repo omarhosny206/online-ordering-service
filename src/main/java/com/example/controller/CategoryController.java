@@ -1,50 +1,47 @@
 package com.example.controller;
 
+import com.example.dto.CategoryDto;
 import com.example.entity.Category;
-import com.example.entity.Product;
-import com.example.service.impl.CategoryServiceImpl;
+import com.example.service.CategoryService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
+@PreAuthorize("hasAnyAuthority('admin', 'seller')")
 public class CategoryController {
 
-    private CategoryServiceImpl categoryServiceImpl;
+    private final CategoryService categoryService;
 
-    public CategoryController(CategoryServiceImpl categoryServiceImpl) {
-        this.categoryServiceImpl = categoryServiceImpl;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/")
-    public List<Category> getAll() {
-        return categoryServiceImpl.getAll();
+    public ResponseEntity<List<Category>> getAll() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(categoryService.getAll());
     }
 
     @GetMapping("/{id}")
-    public Category getById(@PathVariable int id) {
-        return categoryServiceImpl.getById(id);
+    public ResponseEntity<Category> getById(@PathVariable int id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(categoryService.getById(id));
     }
 
 
     @PostMapping("/")
-    public Category save(@RequestBody Category category) {
-        return categoryServiceImpl.save(category);
-    }
-
-    @PutMapping("/")
-    public Category update(@RequestBody Category category) {
-        return categoryServiceImpl.update(category);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        categoryServiceImpl.delete(id);
-    }
-
-    @GetMapping("/{id}/products")
-    public List<Product> getProducts(@PathVariable int id) {
-        return categoryServiceImpl.getProducts(id);
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<Category> save(@Valid @RequestBody CategoryDto categoryDto) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(categoryService.save(categoryDto));
     }
 }

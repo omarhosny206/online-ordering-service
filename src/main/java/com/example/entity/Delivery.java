@@ -16,7 +16,7 @@ import java.util.Date;
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
@@ -25,4 +25,8 @@ public class Delivery {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Order order;
+
+    public Delivery(Order order) {
+        this.order = order;
+    }
 }

@@ -16,10 +16,10 @@ import java.util.Date;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false)
-    private double totalPrice;
+    private double totalPrice = 0.0;
 
     @Column(nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
@@ -29,7 +29,7 @@ public class Order {
     @JoinColumn(name = "customer_id", nullable = false)
     private User customer;
 
-    @ManyToOne
-    @JoinColumn(name = "seller_id", nullable = false)
-    private User seller;
+    public Order(User customer) {
+        this.customer = customer;
+    }
 }

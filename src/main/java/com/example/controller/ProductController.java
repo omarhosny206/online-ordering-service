@@ -1,90 +1,62 @@
 package com.example.controller;
 
-import com.example.entity.*;
-import com.example.service.impl.ProductService;
+import com.example.dto.ProductDto;
+import com.example.entity.Product;
+import com.example.response.MessageResponse;
+import com.example.service.ProductService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
+@PreAuthorize("hasAnyAuthority('admin', 'seller')")
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/")
-    public List<Product> getAll() {
-        return productService.getAll();
+    public ResponseEntity<List<Product>> getAll() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productService.getAll());
     }
 
     @GetMapping("/{id}")
-    public Product getById(@PathVariable int id) {
-        return productService.getById(id);
+    public ResponseEntity<Product> getById(@PathVariable long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productService.getById(id));
     }
 
     @PostMapping("/")
-    public Product save(@RequestBody Product product) {
-        return productService.save(product);
+    public ResponseEntity<Product> save(@Valid @RequestBody ProductDto productDto) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(productService.save(productDto));
     }
 
-    @PutMapping("/")
-    public Product update(@RequestBody Product product) {
-        return productService.update(product);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<Product> update(@PathVariable long id, @Valid @RequestBody ProductDto productDto) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productService.update(id, productDto));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id) {
+    @PreAuthorize("hasAuthority('admin')")
+    public ResponseEntity<MessageResponse> deleteById(@PathVariable int id) {
         productService.deleteById(id);
-    }
-
-    @GetMapping("/{id}/category")
-    public Category getCategory(@PathVariable int id) {
-        return productService.getCategory(id);
-    }
-
-    @GetMapping("/{id}/sellers")
-    public List<Seller> getSellers(@PathVariable int id) {
-        return productService.getSellers(id);
-    }
-
-    @GetMapping("/{id}/prices")
-    public List<Double> getPrices(@PathVariable int id) {
-        return productService.getPrices(id);
-    }
-
-    @GetMapping("/{id}/sellers-prices")
-    public List<UserProduct> getSellersPrices(@PathVariable int id) {
-        return productService.getSellersPrices(id);
-    }
-
-    @GetMapping("/{id}/orders")
-    public List<Order> getOrders(@PathVariable int id) {
-        return productService.getOrders(id);
-    }
-
-    @GetMapping("/{id}/deliveries")
-    public List<Delivery> getDeliveries(@PathVariable int id) {
-        return productService.getDeliveries(id);
-    }
-
-    @GetMapping("/{id}/customers")
-    public List<Customer> getCustomers(@PathVariable int id) {
-        return productService.getCustomers(id);
-    }
-
-    @PostMapping("/{id}/{categoryId}")
-    @Transactional
-    public Category addCategory(@PathVariable int id, @PathVariable int categoryId) {
-        return productService.addCategory(id, categoryId);
-    }
-
-    @PostMapping("/{id}/order")
-    @Transactional
-    public Order addOrder(@PathVariable int id) {
-        return productService.addOrder(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new MessageResponse("Deleted successfully"));
     }
 }

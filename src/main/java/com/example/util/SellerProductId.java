@@ -12,10 +12,10 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserProductId implements Serializable {
-    @Column(name = "user_id")
-    private int userId;
+public class SellerProductId implements Serializable {
+    @Column(name = "seller_id", nullable = false)
+    private long sellerId;
 
-    @Column(name = "product_id")
-    private int productId;
+    @Column(name = "product_id", nullable = false)
+    private long productId;
 }

@@ -1,18 +1,22 @@
 package com.example.controller;
 
-import com.example.entity.Delivery;
 import com.example.entity.Order;
-import com.example.entity.Product;
-import com.example.service.impl.OrderService;
+import com.example.response.MessageResponse;
+import com.example.service.OrderService;
+import com.example.util.AuthenticationUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/orders")
+@RequestMapping("/api/orders")
+@PreAuthorize("hasAuthority('customer')")
 public class OrderController {
-
     private final OrderService orderService;
 
     @Autowired
@@ -21,61 +25,38 @@ public class OrderController {
     }
 
     @GetMapping("/")
-    public List<Order> getAll() {
-        return orderService.getAll();
+    public ResponseEntity<List<Order>> getAll() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(orderService.getAll());
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<List<Order>> getAllByCustomerId(Authentication authentication) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(orderService.getByIdCustomerId(AuthenticationUser.get(authentication).getId()));
     }
 
     @GetMapping("/{id}")
-    public Order getById(@PathVariable("id") int id) {
-        return orderService.getById(id);
-    }
-
-    @GetMapping("/{id}/customers")
-    public Customer getCustomer(@PathVariable("id") int id) {
-        return orderService.getCustomer(id);
-    }
-
-    @GetMapping("/{id}/sellers")
-    public Seller getSeller(@PathVariable("id") int id) {
-        return orderService.getSeller(id);
-    }
-
-    @GetMapping("/{id}/products")
-    public Product getProduct(@PathVariable("id") int id) {
-        return orderService.getProduct(id);
-    }
-
-    @GetMapping("/{id}/deliveries")
-    public Delivery getDelivery(@PathVariable("id") int id) {
-        return orderService.getDelivery(id);
+    public ResponseEntity<Order> getById(@PathVariable int id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(orderService.getById(id));
     }
 
     @PostMapping("/")
-    public void save(
-            @RequestBody Order order,
-            @RequestParam("customerId") int customerId,
-            @RequestParam("sellerId") int sellerId,
-            @RequestParam("productId") int productId,
-            @RequestParam("deliveryId") int deliveryId
-    ) {
-        orderService.save(order, customerId, sellerId, productId, deliveryId);
-    }
-
-
-    @PutMapping("/{id}")
-    public void update(
-            @PathVariable("id") Integer orderId,
-            @RequestParam(name = "customerId", required = false) Integer customerId,
-            @RequestParam(name = "sellerId", required = false) Integer sellerId,
-            @RequestParam(name = "productId", required = false) Integer productId,
-            @RequestParam(name = "deliveryId", required = false) Integer deliveryId
-    ) {
-        orderService.update(orderId, customerId, sellerId, productId, deliveryId);
+    public ResponseEntity<Order> save(Authentication authentication) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(orderService.save(AuthenticationUser.get(authentication)));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") int id) {
-        orderService.deleteById(id);
+    public ResponseEntity<MessageResponse> deleteById(Authentication authentication, @PathVariable int id) {
+        orderService.deleteById(AuthenticationUser.get(authentication), id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new MessageResponse("Deleted successfully"));
     }
-
 }

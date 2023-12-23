@@ -34,7 +34,8 @@ public class LoginServiceImpl implements LoginService {
 
         LoginResponseDto loginResponseDto = new LoginResponseDto(user,
                 jwtUtil.generateAccessToken(user.getEmail()),
-                jwtUtil.generateRefreshToken(user.getEmail()));
+                jwtUtil.generateRefreshToken(user.getEmail())
+        );
         return loginResponseDto;
     }
 }

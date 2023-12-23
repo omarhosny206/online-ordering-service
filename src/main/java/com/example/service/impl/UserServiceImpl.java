@@ -1,9 +1,12 @@
 package com.example.service.impl;
 
+import com.example.dto.UpdateUserDto;
+import com.example.dto.UpdateUserEmailDto;
+import com.example.dto.UpdateUserUsernameDto;
 import com.example.entity.User;
-import com.example.util.ApiError;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
+import com.example.util.ApiError;
 import com.example.util.CustomUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -61,6 +64,33 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public User update(User authenticatedUser, UpdateUserDto updateUserDto) {
+        authenticatedUser.setFirstName(updateUserDto.getFirstName());
+        authenticatedUser.setLastName(updateUserDto.getLastName());
+        return save(authenticatedUser);
+    }
+
+    @Override
+    public User updateEmail(User authenticatedUser, UpdateUserEmailDto updateUserEmailDto) {
+        boolean existsByEmail = getByEmailOrNull(updateUserEmailDto.getEmail()) != null;
+        if (existsByEmail) {
+            throw ApiError.conflict("Email is already used, choose another one");
+        }
+        authenticatedUser.setEmail(updateUserEmailDto.getEmail());
+        return save(authenticatedUser);
+    }
+
+    @Override
+    public User updateUsername(User authenticatedUser, UpdateUserUsernameDto updateUserUsernameDto) {
+        boolean existsByUsername = getByUsernameOrNull(updateUserUsernameDto.getUsername()) != null;
+        if (existsByUsername) {
+            throw ApiError.conflict("Username is already used, choose another one");
+        }
+        authenticatedUser.setUsername(updateUserUsernameDto.getUsername());
+        return save(authenticatedUser);
     }
 
     @Override

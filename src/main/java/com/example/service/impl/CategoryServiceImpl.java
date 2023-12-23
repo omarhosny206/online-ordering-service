@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getById(int id) {
+    public Category getById(long id) {
         return categoryRepository.findById(id).orElseThrow(() -> ApiError.notFound("Category not found with id=" + id));
     }
 
@@ -58,7 +58,6 @@ public class CategoryServiceImpl implements CategoryService {
         if (existsByName) {
             throw ApiError.conflict("Category already exists with name=" + categoryDto.getName());
         }
-
         Category category = new Category(categoryDto.getName());
         return save(category);
     }
