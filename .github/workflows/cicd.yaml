@@ -31,9 +31,9 @@ jobs:
     needs: ci-build-and-push-docker-image
     steps:
       - name: Remove existing docker containers
-        run: docker rm -f $(docker ps -aq | grep -v "$(docker ps -aq -f "name=runner")") || true
+        run: docker rm -f $(docker ps -aq | grep -vE "$(docker ps -aq -f "name=runner|name=postgres")") || true
       - name: Delete existing docker images
-        run: docker rmi -f $(docker image ls -q --format '{{.Repository}}:{{.Tag}}' | grep -v "runner") || true
+        run: docker rmi -f $(docker image ls -q --format '{{.Repository}}:{{.Tag}}' | grep -vE "runner|postgres") || true
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run docker containers
