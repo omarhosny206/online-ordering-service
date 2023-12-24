@@ -18,12 +18,12 @@ jobs:
         run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
       - name: Build docker image
         run: |
-          docker build -t $DOCKERHUB_USERNAME/online-ordering-service:latest .
           docker build -t $DOCKERHUB_USERNAME/online-ordering-service:${{ github.sha }} .
+          docker build -t $DOCKERHUB_USERNAME/online-ordering-service:latest .
       - name: Push docker image to dockerhub
         run: |
-          docker push $DOCKERHUB_USERNAME/online-ordering-service:latest 
           docker push $DOCKERHUB_USERNAME/online-ordering-service:${{ github.sha }}
+          docker push $DOCKERHUB_USERNAME/online-ordering-service:latest 
   cd-deploy-container-to-ec2:
     runs-on: self-hosted  # Note: you can replace "self-hosted" with the label of your self-hosted runner
     env:
@@ -33,7 +33,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Remove existing docker containers
-        run: docker rm -f $(docker ps -aq | grep -vE "$(docker ps -aq -f "name=runner|name=postgres")") || true
+        run: docker rm -f $(docker ps -aq | grep -vE "$(docker ps -aq -f "name=runner|postgres")") || true
       - name: Delete existing docker images
         run: docker rmi -f $(docker image ls -q --format '{{.Repository}}:{{.Tag}}' | grep -vE "runner|postgres") || true
       - name: Run docker containers
