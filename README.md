@@ -110,3 +110,10 @@ These features collectively provide a comprehensive online ordering experience, 
 ## **Features to add in the future 💭**
 - Adding OAuth 2.0.
 - Signup with Google, Facebook and other platforms.
+
+## **Contribution 🤝**
+If you're interested in contributing to this repository, please follow these guidelines:
+- Fork the repository.
+- Make your changes.
+- Submit a Pull Request.
+
