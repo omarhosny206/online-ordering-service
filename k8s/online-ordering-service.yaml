@@ -40,7 +40,7 @@ spec:
                   name: postgres-configmap
                   key: db-name
             - name: DATABASE_PORT
-              value: 3300
+              value: "3300"
           ports:
             - containerPort: 8080
   strategy:
