@@ -53,14 +53,13 @@ kind: Service
 metadata:
   name: postgres-service
 spec:
+  type: ClusterIP
   selector:
     app: postgres
   ports:
     - name: postgres-service
-      port: 5432
+      port: 3300
       targetPort: 5432
-      nodePort: 30030
-  type: NodePort
 
 ---
 apiVersion: v1
