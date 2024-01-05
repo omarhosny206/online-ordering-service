@@ -39,6 +39,8 @@ spec:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: db-name
+            - name: DATABASE_PORT
+              value: 3300
           ports:
             - containerPort: 8080
   strategy:
@@ -52,13 +54,31 @@ kind: Service
 metadata:
   name: online-ordering-service-service
   labels:
-    app: online-ordering-service
+    app: online-ordering-service-service
 spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-      nodePort: 30016
+  type: ClusterIP
   selector:
     app: online-ordering-service
-  type: LoadBalancer
+  ports:
+    - port: 3200
+      targetPort: 8080
+      protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: online-ordering-service-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.online-ordering-service.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: online-ordering-service-service
+                port:
+                  number: 3200
