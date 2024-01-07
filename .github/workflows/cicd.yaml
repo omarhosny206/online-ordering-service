@@ -26,7 +26,6 @@ jobs:
           docker push $DOCKERHUB_USERNAME/online-ordering-service:latest 
   cd-deploy-container-to-ec2:
     runs-on: self-hosted  # Note: you can replace "self-hosted" with the label of your self-hosted runner
-    if: runner.count > 0
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
     needs: ci-build-and-push-docker-image
