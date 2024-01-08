@@ -70,7 +70,7 @@ These features collectively provide a comprehensive online ordering experience, 
 
 ## **Usage 🛠️**
 - **Kubernetes**
-    - Run [`deploye.sh`](./k8s/deploy.sh) file:
+    - Run [`deploy.sh`](./k8s/deploy.sh) file:
       ```shell
       cd ./k8s
       chmod +x ./deploy.sh
