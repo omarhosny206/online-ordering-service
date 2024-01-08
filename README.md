@@ -69,16 +69,24 @@ provided by the system:
 These features collectively provide a comprehensive online ordering experience, with secure authentication and role-based authorization tailored to the specific needs of administrators, sellers, and customers. Feel free to explore and make the most of your online shopping and selling experience!
 
 ## **Usage 🛠️**
-- Run in **development** environment:
-  ```shell
-  docker-compose -f docker-compose-dev.yaml up -d --build
-  # to stop --> docker-compose -f docker-compose-dev.yaml down
-  ```
-- Run in **production** environment:
-  ```shell
-  docker-compose up -d --build
-  # to stop --> docker-compose down
-  ```
+- **Kubernetes**
+    - Run [`deploye.sh`](./k8s/deploy.sh) file:
+      ```shell
+      cd ./k8s
+      chmod +x ./deploy.sh
+      sudo ./deploy.sh
+      ```
+- **Docker**
+    - Run in **development** environment:
+      ```shell
+      docker-compose -f docker-compose-dev.yaml up -d --build
+      # to stop --> docker-compose -f docker-compose-dev.yaml down
+      ```
+    - Run in **production** environment:
+      ```shell
+      docker-compose up -d --build
+      # to stop --> docker-compose down
+      ```
 
 ## **CI/CD 🚀** [`🔗`](./.github/workflows/cicd.yaml)
 ![CICD](https://github.com/omarhosny206/omarhosny206/assets/58389695/3e00292e-6229-41f2-aad8-2ee1ebfe9ec0)
@@ -116,4 +124,3 @@ If you're interested in contributing to this repository, please follow these gui
 - Fork the repository.
 - Make your changes.
 - Submit a Pull Request.
-
