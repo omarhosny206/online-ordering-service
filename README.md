@@ -90,7 +90,7 @@ These features collectively provide a comprehensive online ordering experience, 
 
 ## **CI/CD 🚀** [`🔗`](./.github/workflows/cicd.yaml)
 
-![d__omar hosny_data_developer_AWS_AWS-Apple-Pay-Flow](https://github.com/omarhosny206/online-ordering-service/assets/58389695/0a6868c5-92fa-4a95-bc0e-20df0054422c)
+![Deployment_Flow](https://github.com/omarhosny206/online-ordering-service/assets/58389695/2238601c-b15c-4f06-abc4-4695d032400d)
 ![CICD](https://github.com/omarhosny206/omarhosny206/assets/58389695/3e00292e-6229-41f2-aad8-2ee1ebfe9ec0)
   - **CI**:
     - Checkout the code.
